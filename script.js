@@ -38,22 +38,53 @@ document.addEventListener('DOMContentLoaded', function () {
 // ===== HAMBURGER MENU TOGGLE =====
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
+const body = document.body;
 
 if (hamburger && navMenu) {
-  hamburger.addEventListener('click', function () {
+  hamburger.addEventListener('click', function (e) {
+    e.stopPropagation();
     navMenu.classList.toggle('active');
+    body.classList.toggle('menu-open');
+    
+    // Animate hamburger to X
     const bars = document.querySelectorAll('.bar');
-    bars.forEach(bar => bar.style.backgroundColor = '#f39c12');
-    if (!navMenu.classList.contains('active')) {
+    if (navMenu.classList.contains('active')) {
+      bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+      bars[1].style.opacity = '0';
+      bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+      bars.forEach(bar => bar.style.backgroundColor = 'teal');
+    } else {
+      bars[0].style.transform = 'rotate(0) translate(0, 0)';
+      bars[1].style.opacity = '1';
+      bars[2].style.transform = 'rotate(0) translate(0, 0)';
       bars.forEach(bar => bar.style.backgroundColor = '#f0f0f0');
     }
   });
 
+  // Close menu when clicking a link
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function () {
       navMenu.classList.remove('active');
-      document.querySelectorAll('.bar').forEach(bar => bar.style.backgroundColor = '#f0f0f0');
+      body.classList.remove('menu-open');
+      const bars = document.querySelectorAll('.bar');
+      bars[0].style.transform = 'rotate(0) translate(0, 0)';
+      bars[1].style.opacity = '1';
+      bars[2].style.transform = 'rotate(0) translate(0, 0)';
+      bars.forEach(bar => bar.style.backgroundColor = '#f0f0f0');
     });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function (e) {
+    if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+      navMenu.classList.remove('active');
+      body.classList.remove('menu-open');
+      const bars = document.querySelectorAll('.bar');
+      bars[0].style.transform = 'rotate(0) translate(0, 0)';
+      bars[1].style.opacity = '1';
+      bars[2].style.transform = 'rotate(0) translate(0, 0)';
+      bars.forEach(bar => bar.style.backgroundColor = '#f0f0f0');
+    }
   });
 }
 
