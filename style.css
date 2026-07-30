@@ -185,7 +185,8 @@ ul {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 5rem;
+  padding-top: 6rem; /* Increased from 5rem */
+  padding-bottom: 2rem;
 }
 
 .home-container {
@@ -855,4 +856,30 @@ ul {
 /* Prevent body scroll when menu is open */
 body.menu-open {
   overflow: hidden;
+}
+
+/* Make sure the close button is visible */
+.close-menu {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+  background: none;
+  border: none;
+  z-index: 1002;
+}
+
+.close-menu:hover {
+  transform: rotate(90deg);
+  color: teal;
+}
+
+/* Hide close button on desktop */
+@media (min-width: 769px) {
+  .close-menu {
+    display: none !important;
+  }
 }
