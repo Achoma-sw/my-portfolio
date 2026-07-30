@@ -36,57 +36,70 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ===== HAMBURGER MENU TOGGLE =====
-const hamburger = document.querySelector('.hamburger');
+const hamburger = document.getElementById('hamburger');
 const navMenu = document.querySelector('.nav-menu');
+const navOverlay = document.getElementById('navOverlay');
+const closeMenu = document.getElementById('closeMenu');
 const body = document.body;
 
-if (hamburger && navMenu) {
+function openMenu() {
+  navMenu.classList.add('active');
+  navOverlay.classList.add('active');
+  body.classList.add('menu-open');
+  
+  // Animate hamburger to X
+  const bars = document.querySelectorAll('.bar');
+  bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+  bars[1].style.opacity = '0';
+  bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+  bars.forEach(bar => bar.style.backgroundColor = 'teal');
+}
+
+function closeMenuFunc() {
+  navMenu.classList.remove('active');
+  navOverlay.classList.remove('active');
+  body.classList.remove('menu-open');
+  
+  // Reset hamburger
+  const bars = document.querySelectorAll('.bar');
+  bars[0].style.transform = 'rotate(0) translate(0, 0)';
+  bars[1].style.opacity = '1';
+  bars[2].style.transform = 'rotate(0) translate(0, 0)';
+  bars.forEach(bar => bar.style.backgroundColor = '#f0f0f0');
+}
+
+if (hamburger) {
   hamburger.addEventListener('click', function (e) {
     e.stopPropagation();
-    navMenu.classList.toggle('active');
-    body.classList.toggle('menu-open');
-    
-    // Animate hamburger to X
-    const bars = document.querySelectorAll('.bar');
     if (navMenu.classList.contains('active')) {
-      bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
-      bars[1].style.opacity = '0';
-      bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
-      bars.forEach(bar => bar.style.backgroundColor = 'teal');
+      closeMenuFunc();
     } else {
-      bars[0].style.transform = 'rotate(0) translate(0, 0)';
-      bars[1].style.opacity = '1';
-      bars[2].style.transform = 'rotate(0) translate(0, 0)';
-      bars.forEach(bar => bar.style.backgroundColor = '#f0f0f0');
-    }
-  });
-
-  // Close menu when clicking a link
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function () {
-      navMenu.classList.remove('active');
-      body.classList.remove('menu-open');
-      const bars = document.querySelectorAll('.bar');
-      bars[0].style.transform = 'rotate(0) translate(0, 0)';
-      bars[1].style.opacity = '1';
-      bars[2].style.transform = 'rotate(0) translate(0, 0)';
-      bars.forEach(bar => bar.style.backgroundColor = '#f0f0f0');
-    });
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener('click', function (e) {
-    if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-      navMenu.classList.remove('active');
-      body.classList.remove('menu-open');
-      const bars = document.querySelectorAll('.bar');
-      bars[0].style.transform = 'rotate(0) translate(0, 0)';
-      bars[1].style.opacity = '1';
-      bars[2].style.transform = 'rotate(0) translate(0, 0)';
-      bars.forEach(bar => bar.style.backgroundColor = '#f0f0f0');
+      openMenu();
     }
   });
 }
+
+if (closeMenu) {
+  closeMenu.addEventListener('click', closeMenuFunc);
+}
+
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeMenuFunc);
+}
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function () {
+    closeMenuFunc();
+  });
+});
+
+// Close on escape key
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+    closeMenuFunc();
+  }
+});
 
 // ===== ACTIVE NAV LINK ON SCROLL =====
 const sections = document.querySelectorAll('section');
