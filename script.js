@@ -118,39 +118,4 @@ window.addEventListener('scroll', function () {
   navLinks.forEach(link => {
     link.classList.remove('active');
     if (link.getAttribute('href') === '#' + current) {
-      link.classList.add('active');
-    }
-  });
-});
-
-// ===== SMOOTH SCROLL FOR NAVIGATION =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
-    
-    // Skip if it's just "#" or empty
-    if (targetId === '#' || targetId === '') return;
-    
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      e.preventDefault();
-      const headerHeight = document.querySelector('.header').offsetHeight;
-      const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-
-// ===== CONTACT FORM =====
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    alert('Thank you for your message! I will get back to you soon.');
-    this.reset();
-  });
-}
+      link.classList.add('
