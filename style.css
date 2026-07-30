@@ -1,3 +1,23 @@
+/* ----- MOBILE FIRST IMPROVEMENTS ----- */
+html {
+  font-size: 16px;
+}
+
+/* Better touch targets for mobile */
+button, 
+a,
+input,
+textarea {
+  touch-action: manipulation;
+}
+
+/* Prevent zoom on inputs for mobile */
+input, 
+textarea,
+select {
+  font-size: 16px !important;
+}
+
 /* ----- RESET & BASE ----- */
 * {
   margin: 0;
@@ -482,80 +502,352 @@ ul {
 }
 
 /* ----- RESPONSIVE ----- */
-@media (max-width: 900px) {
-  .about-grid {
-    grid-template-columns: 1fr;
+/* Tablet and small laptops */
+@media (max-width: 1024px) {
+  .home-content h1 {
+    font-size: 2.8rem;
   }
-  .contact-container {
-    grid-template-columns: 1fr;
+  
+  .home-image {
+    flex: 0 0 250px;
+  }
+  
+  .home-image img {
+    max-width: 280px;
   }
 }
 
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .about-stats {
+    justify-content: flex-start;
+  }
+}
+
+/* Tablets and large phones */
 @media (max-width: 768px) {
+  /* Navigation */
   .hamburger {
     display: flex;
+    z-index: 1001;
   }
 
   .nav-menu {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    flex-direction: column;
-    background: rgba(14, 14, 14, 0.98);
-    padding: 2rem 2rem;
-    gap: 1.8rem;
-    transform: translateY(-120%);
+    height: 100vh;
+    background: rgba(8, 8, 82, 0.98);
+    padding: 6rem 2rem 2rem;
+    gap: 2rem;
+    transform: translateX(100%);
     transition: transform 0.4s ease;
-    border-bottom: 1px solid #2a2a2a;
+    border-bottom: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
   }
 
   .nav-menu.active {
-    transform: translateY(0);
+    transform: translateX(0);
+  }
+
+  .nav-item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-link {
+    font-size: 1.5rem;
+    padding: 0.8rem 0;
+    display: block;
+  }
+
+  .nav-link::after {
+    bottom: -2px;
+  }
+
+  /* Home section */
+  .home {
+    min-height: auto;
+    padding: 6rem 0 3rem;
   }
 
   .home-container {
     flex-direction: column-reverse;
     text-align: center;
+    gap: 1.5rem;
   }
 
-  .home-content p {
-    margin-left: auto;
-    margin-right: auto;
+  .home-content {
+    flex: 1 1 auto;
+    width: 100%;
   }
 
   .home-content h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+  }
+
+  .home-content h1 span {
+    display: inline-block;
   }
 
   .typing-text {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     white-space: normal;
     border-right: none;
     animation: none;
+    min-height: auto;
+  }
+
+  .home-content p {
+    font-size: 1rem;
+    max-width: 100%;
+    margin: 0 auto 1.5rem;
+    padding: 0 0.5rem;
   }
 
   .home-image {
-    flex: 0 0 200px;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
   }
+
   .home-image img {
-    max-width: 220px;
+    max-width: 200px;
+    margin: 0 auto;
+    border-width: 3px;
+  }
+
+  .btn {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.95rem;
+  }
+
+  /* Section padding */
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-title::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  /* About section */
+  .about-grid {
+    gap: 1.5rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
   }
 
   .about-stats {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .about-stats div {
+    font-size: 0.9rem;
+    text-align: center;
+    flex: 1 1 80px;
+  }
+
+  .about-stats span {
+    font-size: 1.8rem;
+  }
+
+  /* Skills */
+  .skill span {
+    font-size: 0.95rem;
+  }
+
+  .progress {
+    height: 8px;
+  }
+
+  /* Services */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .service-card i {
+    font-size: 2.5rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Portfolio */
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .portfolio-item img {
+    height: 200px;
+  }
+
+  .portfolio-overlay h3 {
+    font-size: 1.2rem;
+  }
+
+  .portfolio-overlay p {
+    font-size: 0.9rem;
+  }
+
+  .tech-stack span {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.6rem;
+  }
+
+  .project-links a {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  /* Contact */
+  .contact-container {
+    gap: 1.5rem;
+  }
+
+  .contact-info {
+    font-size: 1rem;
+    gap: 1rem;
+  }
+
+  .contact-info i {
+    font-size: 1.2rem;
+    width: 1.8rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-form textarea {
+    min-height: 120px;
+  }
+
+  .contact-form .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Social links */
+  .social-links a {
+    font-size: 1.5rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 1.5rem 0;
+    font-size: 0.8rem;
   }
 }
 
+/* Small phones */
 @media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+
   .section-title {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
-  .portfolio-grid {
-    grid-template-columns: 1fr;
+
+  .home-content h1 {
+    font-size: 1.8rem;
   }
-  .services-grid {
-    grid-template-columns: 1fr;
+
+  .home-content p {
+    font-size: 0.9rem;
+  }
+
+  .home-image {
+    max-width: 180px;
+  }
+
+  .home-image img {
+    max-width: 150px;
+  }
+
+  .about-stats div {
+    flex: 1 1 60px;
+    font-size: 0.8rem;
+  }
+
+  .about-stats span {
+    font-size: 1.5rem;
+  }
+
+  .portfolio-item img {
+    height: 170px;
+  }
+
+  .portfolio-overlay h3 {
+    font-size: 1rem;
+  }
+
+  .contact-info {
+    font-size: 0.9rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+  .home-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .home-content p {
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .portfolio-item img {
+    height: 150px;
   }
 }
