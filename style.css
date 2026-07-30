@@ -166,9 +166,9 @@ ul {
   color: teal;
 }
 
-/* Hamburger icon - always visible on all screen sizes */
+/* Hamburger icon - ALWAYS VISIBLE on all screen sizes */
 .hamburger {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
@@ -184,94 +184,41 @@ ul {
   transition: 0.3s;
 }
 
-/* Mobile navigation - right slide panel */
-@media (max-width: 768px) {
-  /* Overlay background */
-  .nav-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 999;
-  }
-
-  .nav-overlay.active {
-    display: block;
-  }
-
-  /* Right slide panel - 30% width */
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -30%;
-    width: 30%;
-    height: 100vh;
-    background: rgba(8, 8, 82, 0.98);
-    padding: 5rem 1.5rem 2rem;
-    gap: 1.5rem;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    transition: right 0.4s ease;
-    z-index: 1000;
-    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
-    border-left: 2px solid teal;
-  }
-
-  .nav-menu.active {
-    right: 0;
-  }
-
-  .nav-item {
-    width: 100%;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.5rem 0;
-  }
-
-  .nav-link {
-    font-size: 1.1rem;
-    padding: 0.5rem 0;
-    display: block;
-    color: #fff;
-  }
-
-  .nav-link::after {
-    bottom: -2px;
-  }
-
-  .nav-link:hover {
-    color: teal;
-  }
-
-  /* Close button */
-  .close-menu {
-    position: absolute;
-    top: 1.2rem;
-    right: 1.2rem;
-    color: #fff;
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: transform 0.3s;
-    background: none;
-    border: none;
-  }
-
-  .close-menu:hover {
-    transform: rotate(90deg);
-    color: teal;
-  }
+/* Overlay for mobile */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
 }
 
-/* Desktop - hide hamburger on large screens */
-@media (min-width: 769px) {
-  .hamburger {
-    display: none !important;
-  }
+.nav-overlay.active {
+  display: block;
+}
+
+/* Close button */
+.close-menu {
+  display: none;
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+  background: none;
+  border: none;
+  z-index: 1002;
+}
+
+.close-menu:hover {
+  transform: rotate(90deg);
+  color: teal;
 }
 
 /* ----- HOME ----- */
@@ -279,7 +226,7 @@ ul {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 6rem; /* Increased from 5rem */
+  padding-top: 80px; /* Fixed padding for header */
   padding-bottom: 2rem;
 }
 
@@ -499,6 +446,48 @@ ul {
   margin-bottom: 1rem;
 }
 
+/* Tech stack and project links styles */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.tech-stack span {
+  background: rgba(0, 128, 128, 0.2);
+  color: #20b2aa;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  border: 1px solid rgba(0, 128, 128, 0.3);
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.project-links a {
+  background: teal;
+  color: #0e0e0e;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.project-links a:hover {
+  transform: scale(1.1);
+  background: #20b2aa;
+}
+
 .portfolio-overlay a {
   background: teal;
   color: #0e0e0e;
@@ -596,7 +585,13 @@ ul {
   font-size: 0.9rem;
 }
 
+/* Prevent body scroll when menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
 /* ----- RESPONSIVE ----- */
+
 /* Tablet and small laptops */
 @media (max-width: 1024px) {
   .home-content h1 {
@@ -628,55 +623,64 @@ ul {
   }
 }
 
-/* Tablets and large phones */
+/* Mobile devices */
 @media (max-width: 768px) {
-  /* Navigation */
-  .hamburger {
-    display: flex;
-    z-index: 1001;
-  }
-
+  /* Hide desktop nav */
   .nav-menu {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
     height: 100vh;
     background: rgba(8, 8, 82, 0.98);
-    padding: 6rem 2rem 2rem;
-    gap: 2rem;
-    transform: translateX(100%);
-    transition: transform 0.4s ease;
-    border-bottom: none;
-    justify-content: center;
-    align-items: center;
+    padding: 5rem 1.5rem 2rem;
+    gap: 1.5rem;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: right 0.4s ease;
     z-index: 1000;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+    border-left: 2px solid teal;
   }
 
   .nav-menu.active {
-    transform: translateX(0);
+    right: 0;
   }
 
   .nav-item {
     width: 100%;
-    text-align: center;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 0;
   }
 
   .nav-link {
-    font-size: 1.5rem;
-    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
     display: block;
+    color: #fff;
   }
 
   .nav-link::after {
     bottom: -2px;
   }
 
+  .nav-link:hover {
+    color: teal;
+  }
+
+  /* Show close button on mobile */
+  .close-menu {
+    display: block !important;
+  }
+
   /* Home section */
   .home {
+    padding-top: 70px;
     min-height: auto;
-    padding: 6rem 0 3rem;
+    padding-bottom: 3rem;
   }
 
   .home-container {
@@ -716,12 +720,12 @@ ul {
   .home-image {
     flex: 0 0 auto;
     width: 100%;
-    max-width: 250px;
+    max-width: 220px;
     margin: 0 auto;
   }
 
   .home-image img {
-    max-width: 200px;
+    max-width: 180px;
     margin: 0 auto;
     border-width: 3px;
   }
@@ -875,6 +879,10 @@ ul {
     padding: 0 1rem;
   }
 
+  .home {
+    padding-top: 60px;
+  }
+
   .section-title {
     font-size: 1.6rem;
   }
@@ -921,6 +929,10 @@ ul {
     padding: 0.7rem 0.9rem;
     font-size: 0.9rem;
   }
+
+  .nav-menu {
+    width: 80%;
+  }
 }
 
 /* Extra small phones */
@@ -944,36 +956,5 @@ ul {
 
   .portfolio-item img {
     height: 150px;
-  }
-}
-
-/* Prevent body scroll when menu is open */
-body.menu-open {
-  overflow: hidden;
-}
-
-/* Make sure the close button is visible */
-.close-menu {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  color: #fff;
-  font-size: 1.8rem;
-  cursor: pointer;
-  transition: transform 0.3s;
-  background: none;
-  border: none;
-  z-index: 1002;
-}
-
-.close-menu:hover {
-  transform: rotate(90deg);
-  color: teal;
-}
-
-/* Hide close button on desktop */
-@media (min-width: 769px) {
-  .close-menu {
-    display: none !important;
   }
 }
