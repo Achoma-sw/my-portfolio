@@ -2,6 +2,7 @@
 html {
   font-size: 16px;
 }
+
 /* Better touch targets for mobile */
 button, 
 a,
@@ -9,6 +10,7 @@ input,
 textarea {
   touch-action: manipulation;
 }
+
 /* Prevent zoom on inputs for mobile */
 input, 
 textarea,
@@ -23,12 +25,18 @@ select {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: rgb(8, 8, 82);
   color: white;
   line-height: 1.6;
 }
+
 a {
   text-decoration: none;
   color: inherit;
@@ -37,14 +45,17 @@ a {
 ul {
   list-style: none;
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
+
 .section {
   padding: 5rem 0;
 }
+
 .section-title {
   font-size: 2.5rem;
   text-align: center;
@@ -52,6 +63,7 @@ ul {
   color: #fff;
   position: relative;
 }
+
 .section-title::after {
   content: '';
   display: block;
@@ -61,6 +73,7 @@ ul {
   margin: 0.5rem auto 0;
   border-radius: 4px;
 }
+
 .btn {
   display: inline-block;
   background: teal;
@@ -73,6 +86,7 @@ ul {
   border: none;
   cursor: pointer;
 }
+
 .btn:hover {
   background: rgb(108, 191, 191);
   transform: scale(1.02);
@@ -96,20 +110,24 @@ ul {
   justify-content: space-between;
   align-items: center;
 }
+
 .logo a {
   font-size: 1.8rem;
   font-weight: 700;
   color: teal;
   letter-spacing: 1px;
 }
+
 /* Desktop navigation */
 .nav-menu {
   display: flex;
   gap: 2.2rem;
 }
+
 .nav-item {
   position: relative;
 }
+
 .nav-link {
   font-size: 1rem;
   font-weight: 500;
@@ -118,6 +136,7 @@ ul {
   position: relative;
   padding: 5px 0;
 }
+
 /* Animated underline with teal gradient - left to right on hover */
 .nav-link::after {
   content: '';
@@ -131,15 +150,18 @@ ul {
   transition: width 0.4s ease;
   border-radius: 2px;
 }
+
 /* On hover, underline expands from left to right */
 .nav-link:hover::after {
   width: 100%;
 }
+
 /* Active state - underline stays visible with gradient */
 .nav-link.active::after {
   width: 100%;
   background: linear-gradient(90deg, #304970, #20b2aa);
 }
+
 .nav-link:hover {
   color: teal;
 }
@@ -147,6 +169,7 @@ ul {
 .nav-link.active {
   color: teal;
 }
+
 /* Hamburger icon - always visible on all screen sizes */
 .hamburger {
   display: flex;
@@ -156,6 +179,7 @@ ul {
   z-index: 1001;
   padding: 5px;
 }
+
 .bar {
   width: 28px;
   height: 3px;
@@ -163,6 +187,7 @@ ul {
   border-radius: 4px;
   transition: 0.3s;
 }
+
 /* Mobile navigation - right slide panel */
 @media (max-width: 768px) {
   /* Overlay background */
@@ -177,15 +202,18 @@ ul {
     backdrop-filter: blur(4px);
     z-index: 999;
   }
+
   .nav-overlay.active {
     display: block;
   }
-  /* Right slide panel - 30% width */
+
+  /* Right slide panel */
   .nav-menu {
     position: fixed;
     top: 0;
-    right: -30%;
-    width: 30%;
+    right: 0;
+    width: 75%;
+    max-width: 300px;
     height: 100vh;
     background: rgba(8, 8, 82, 0.98);
     padding: 5rem 1.5rem 2rem;
@@ -193,49 +221,41 @@ ul {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    transition: right 0.4s ease;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
     z-index: 1000;
     box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
     border-left: 2px solid teal;
   }
+
   .nav-menu.active {
-    right: 0;
+    transform: translateX(0);
   }
+
   .nav-item {
     width: 100%;
     text-align: left;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0.5rem 0;
   }
+
   .nav-link {
     font-size: 1.1rem;
     padding: 0.5rem 0;
     display: block;
     color: #fff;
   }
+
   .nav-link::after {
     bottom: -2px;
   }
+
   .nav-link:hover {
     color: teal;
   }
-  /* Close button */
-  .close-menu {
-    position: absolute;
-    top: 1.2rem;
-    right: 1.2rem;
-    color: #fff;
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: transform 0.3s;
-    background: none;
-    border: none;
-  }
-  .close-menu:hover {
-    transform: rotate(90deg);
-    color: teal;
-  }
+
 }
+
 /* Desktop - hide hamburger on large screens */
 @media (min-width: 769px) {
   .hamburger {
@@ -600,49 +620,6 @@ ul {
 
 /* Tablets and large phones */
 @media (max-width: 768px) {
-  /* Navigation */
-  .hamburger {
-    display: flex;
-    z-index: 1001;
-  }
-
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(8, 8, 82, 0.98);
-    padding: 6rem 2rem 2rem;
-    gap: 2rem;
-    transform: translateX(100%);
-    transition: transform 0.4s ease;
-    border-bottom: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 1000;
-  }
-
-  .nav-menu.active {
-    transform: translateX(0);
-  }
-
-  .nav-item {
-    width: 100%;
-    text-align: center;
-  }
-
-  .nav-link {
-    font-size: 1.5rem;
-    padding: 0.8rem 0;
-    display: block;
-  }
-
-  .nav-link::after {
-    bottom: -2px;
-  }
-
   /* Home section */
   .home {
     min-height: auto;
@@ -946,77 +923,4 @@ body.menu-open {
   .close-menu {
     display: none !important;
   }
-}
-
-
-/* ==== Responsive fixes added ==== */
-
-@media (min-width:769px){
-  .hamburger{display:none !important;}
-  .close-menu{display:none !important;}
-  .nav-menu{
-    display:flex !important;
-    position:static !important;
-    width:auto !important;
-    height:auto !important;
-    background:transparent !important;
-    padding:0 !important;
-    right:auto !important;
-    gap:2rem;
-  }
-}
-
-@media (max-width:768px){
-  .hamburger{display:flex !important;}
-  .nav-menu{
-    position:fixed;
-    top:0;
-    right:-100%;
-    width:260px;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    padding:5rem 2rem;
-    gap:1.5rem;
-    transition:right .3s ease;
-    z-index:999;
-  }
-  .nav-menu.active{right:0;}
-  .close-menu{
-    display:block;
-    position:absolute;
-    top:20px;
-    right:20px;
-  }
-
-  .home{
-    padding-top:8rem !important;
-    padding-bottom:3rem;
-    min-height:100vh;
-  }
-
-  .home-container{
-    display:flex;
-    flex-direction:column-reverse;
-    text-align:center;
-    gap:2rem;
-  }
-
-  .home-image img{
-    max-width:90%;
-    width:280px;
-    height:auto;
-    display:block;
-    margin:auto;
-  }
-
-  .about-grid,
-  .services-grid,
-  .portfolio-grid,
-  .contact-grid{
-    grid-template-columns:1fr;
-  }
-
-  .container{padding:0 1.2rem;}
 }
