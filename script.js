@@ -1,5 +1,22 @@
+// ===== DYNAMIC HEADER HEIGHT =====
+function setHeaderHeightVar() {
+  const header = document.querySelector('.header');
+  if (header) {
+    document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+  }
+}
+
+setHeaderHeightVar();
+window.addEventListener('load', setHeaderHeightVar);
+window.addEventListener('resize', setHeaderHeightVar);
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(setHeaderHeightVar);
+}
+
 // ===== TYPING EFFECT =====
 document.addEventListener('DOMContentLoaded', function () {
+  setHeaderHeightVar();
+
   const typingElement = document.querySelector('.typing-text');
   if (!typingElement) return;
 
