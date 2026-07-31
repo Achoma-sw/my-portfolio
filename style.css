@@ -254,6 +254,10 @@ ul {
     color: teal;
   }
 
+  .logo a {
+    font-size: 1.4rem;
+  }
+
 }
 
 /* Desktop - hide hamburger on large screens */
@@ -264,11 +268,15 @@ ul {
 }
 
 /* ----- HOME ----- */
+:root {
+  --header-height: 90px; /* fallback, JS updates this to the real measured height */
+}
+
 .home {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 6rem; /* Increased from 5rem */
+  padding-top: calc(var(--header-height) + 1.5rem);
   padding-bottom: 2rem;
 }
 
@@ -623,7 +631,7 @@ ul {
   /* Home section */
   .home {
     min-height: auto;
-    padding: 6rem 0 3rem;
+    padding: calc(var(--header-height) + 1.5rem) 0 3rem;
   }
 
   .home-container {
